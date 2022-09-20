@@ -5,6 +5,7 @@ import cn.bugstack.springframework.beans.PropertyValue;
 import cn.bugstack.springframework.beans.PropertyValues;
 import cn.bugstack.springframework.beans.factory.ConfigurableListableBeanFactory;
 import cn.bugstack.springframework.beans.factory.config.BeanDefinition;
+import cn.bugstack.springframework.beans.factory.config.BeanFactoryPostProcessor;
 
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 

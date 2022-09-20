@@ -49,4 +49,18 @@ public class ApiTest {
         System.out.println("测试结果：" + result);
     }
 
+    /**
+     * 初始化和销毁方法的测试
+     */
+    @Test
+    public void test_xml2() {
+        // 1.初始化 BeanFactory
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:springInitDisp.xml");
+        applicationContext.registerShutdownHook();
+
+        // 2. 获取Bean对象调用方法
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        String result = userService.queryUserInfo();
+        System.out.println("测试结果：" + result);
+    }
 }

@@ -1,6 +1,7 @@
 package cn.bugstack.springframework.test.common;
 
 import cn.bugstack.springframework.beans.BeansException;
+import cn.bugstack.springframework.beans.factory.config.BeanPostProcessor;
 import cn.bugstack.springframework.test.bean.UserService;
 
 public class MyBeanPostProcessor implements BeanPostProcessor {
