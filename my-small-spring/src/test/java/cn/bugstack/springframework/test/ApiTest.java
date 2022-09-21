@@ -4,6 +4,7 @@ import cn.bugstack.springframework.beans.factory.support.DefaultListableBeanFact
 import cn.bugstack.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import cn.bugstack.springframework.context.support.ClassPathXmlApplicationContext;
 import cn.bugstack.springframework.test.bean.UserService;
+import cn.bugstack.springframework.test.bean.UserServiceAware;
 import cn.bugstack.springframework.test.common.MyBeanFactoryPostProcessor;
 import cn.bugstack.springframework.test.common.MyBeanPostProcessor;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import org.junit.Test;
 public class ApiTest {
 
     @Test
-    public void test_BeanFactoryPostProcessorAndBeanPostProcessor(){
+    public void test_BeanFactoryPostProcessorAndBeanPostProcessor() {
         // 1.初始化 BeanFactory
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
@@ -62,5 +63,21 @@ public class ApiTest {
         UserService userService = applicationContext.getBean("userService", UserService.class);
         String result = userService.queryUserInfo();
         System.out.println("测试结果：" + result);
+    }
+
+    @Test
+    public void test_xml_aware() {
+        // 1.初始化 BeanFactory
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:springAware.xml");
+        applicationContext.registerShutdownHook();
+
+        // 2. 获取Bean对象调用方法
+        UserServiceAware userServiceAware = applicationContext.getBean("userServiceAware", UserServiceAware.class);
+        String result = userServiceAware.queryUserInfo();
+        System.out.println("测试结果：" + result);
+
+        System.out.println("ApplicationContextAware：" + userServiceAware.getApplicationContext());
+        System.out.println("BeanFactoryAware：" + userServiceAware.getBeanFactory());
+
     }
 }
