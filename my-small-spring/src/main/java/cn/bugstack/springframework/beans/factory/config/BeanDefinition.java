@@ -8,10 +8,38 @@ import cn.bugstack.springframework.beans.PropertyValues;
  * Create by 小傅哥(fustack)
  */
 public class BeanDefinition {
+    //singleton、prototype，是本次在 BeanDefinition 类中新增加的两个属性信息，用于把从 spring.xml 中解析到的 Bean 对象作用范围填充到属性中。
+    String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
+    String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
     private Class beanClass;
 
     private PropertyValues propertyValues;
+
+    private String initMethodName;
+
+    private String destroyMethodName;
+
+    private String scope = SCOPE_SINGLETON;
+
+    private boolean singleton = true;
+
+    private boolean prototype = false;
+
+    //在xml注册Bean定义时，通过scope字段来判断是单例还是原型
+    public void setScope(String scope) {
+        this.scope = scope;
+        this.singleton = SCOPE_SINGLETON.equals(scope);
+        this.prototype = SCOPE_PROTOTYPE.equals(scope);
+    }
+
+    public boolean isSingleton() {
+        return singleton;
+    }
+
+    public boolean isPrototype() {
+        return prototype;
+    }
 
     public String getInitMethodName() {
         return initMethodName;
@@ -29,9 +57,6 @@ public class BeanDefinition {
         this.destroyMethodName = destroyMethodName;
     }
 
-    private String initMethodName;
-
-    private String destroyMethodName;
 
     public BeanDefinition(Class beanClass) {
         this.beanClass = beanClass;
