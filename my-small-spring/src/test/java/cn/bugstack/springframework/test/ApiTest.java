@@ -8,8 +8,10 @@ import cn.bugstack.springframework.test.bean.UserServiceAware;
 import cn.bugstack.springframework.test.bean.UserServiceBeanFactoryBean;
 import cn.bugstack.springframework.test.common.MyBeanFactoryPostProcessor;
 import cn.bugstack.springframework.test.common.MyBeanPostProcessor;
+import net.sf.cglib.proxy.Enhancer;
 import org.junit.Test;
 import org.openjdk.jol.info.ClassLayout;
+//import org.openjdk.jol.info.ClassLayout;
 
 /**
  * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
@@ -112,4 +114,5 @@ public class ApiTest {
         UserServiceBeanFactoryBean userService = applicationContext.getBean("userServiceBeanFactoryBean", UserServiceBeanFactoryBean.class);
         System.out.println("测试结果：" + userService.queryUserInfo());
     }
+
 }
